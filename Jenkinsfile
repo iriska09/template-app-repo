@@ -1,32 +1,38 @@
 pipeline {
     agent any
     environment {
-        PACKER_TEMPLATE = 'image-template.pkr.hcl' 
+        PACKER_TEMPLATE = 'image-template.pkr.hcl' // Default value for the Packer template
         REGION = 'us-east-1'
-        AMI_ID = ''
     }
     stages {
         stage('Packer Init') {
             steps {
-                echo 'Initializing Packer...'
+                echo 'Initializing Packer..'
                 sh 'packer init .'
             }
         }
         stage('Validate Packer Template') {
             steps {
-                echo 'Validating Packer template...'
+                echo 'Validating Packer template..'
                 sh 'packer validate ${PACKER_TEMPLATE}'
             }
         }
-        stage('Build Image and Capture AMI') {
+        stage('Build Image and take AMI from output') {
             steps {
                 script {
                     // Run Packer to build the AMI and capture the output
-                    def buildOutput = sh(script: "packer build ${PACKER_TEMPLATE}", returnStdout: true).trim()
+                    def buildOutput = sh(script: "packer build image-template.pkr.hcl", returnStdout: true).trim()
                     echo "Packer Build Output:\n${buildOutput}"
 
-                }
+                    // Extract the AMI ID from the Packer build output
+                    echo "Captured AMI ID: ${amiId}"
+
+                    // Save the AMI ID as an environment variable for the next stage
+                    env.AMI_ID = amiId
+                }     
             }
+        }       
+
     }
     post {
         success {
@@ -39,5 +45,4 @@ pipeline {
             echo 'Pipeline execution completed!'
         }
     }
-}
 }
