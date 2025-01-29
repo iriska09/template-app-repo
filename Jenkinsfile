@@ -8,7 +8,6 @@ pipeline {
         stage('Packer Init') {
             steps {
                 echo 'Initializing Packer..'
-                sh 'apt install packer'
                 sh 'packer init .'
             }
         }
