@@ -17,12 +17,15 @@ source "amazon-ebs" "ami" {
   instance_type    = "t2.medium"
   ssh_username     = "ubuntu"
   ami_name         = var.ami_name
-
+  vpc_id     = "vpc-050b5084fba9f34d9"
+  subnet_id  = "subnet-07279fdc594de49e5" 
   tags = {
     "Environment" = "Dev"
     "Project"     = "dynamic-python-project"
   }
 }
+
+
 
 build {
   sources = ["source.amazon-ebs.ami"]
