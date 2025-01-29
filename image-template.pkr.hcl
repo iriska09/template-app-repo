@@ -29,14 +29,12 @@ source "amazon-ebs" "ami" {
 }
 
 build {
-  sources = ["source.amazon-ebs.ami"]
-
-  provisioner "shell" {
-    inline = [
-      "sudo apt-get update -y",
-      "sudo apt-get install -y python3 python3-pip",
-      "pip3 install -r requirements.txt"
-      "python3 app.py"
-    ]
-  }
+  ...
+  inline = [
+    "sudo apt-get update -y",
+    "sudo apt-get install -y python3 python3-pip",
+    "pip3 install -r requirements.txt",
+    "python3 app.py"
+  ]
 }
+
