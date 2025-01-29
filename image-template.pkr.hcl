@@ -11,25 +11,31 @@ variable "ami_name" {
   default = "hardened-image-{{timestamp}}"
 }
 
+variable "source_ami" {
+  default = "id of ami"  
+}
+
 source "amazon-ebs" "ami" {
   region           = "us-east-1"
-  source_ami       = "ami-0e2c8caa4b6378d8c" 
+  source_ami       = var.source_ami
   instance_type    = "t2.medium"
   ssh_username     = "ubuntu"
   ami_name         = var.ami_name
 
-tags = {
-  "Environment" = "Dev"  # Dynamic value using timestamp()
-  "Project"     = "project-10"  # Dynamic value using timestamp()
-  
+  tags = {
+    "Environment" = "Dev"
+    "Project"     = "dynamic-python-project"
   }
 }
 
 build {
   sources = ["source.amazon-ebs.ami"]
 
-  # Shell provisioner for direct commands
   provisioner "shell" {
-    script = "./script.sh" # Path to your shell script
+    inline = [
+      "sudo apt-get update -y",
+      "sudo apt-get install -y python3 python3-pip",
+      "pip3 install -r requirements.txt"
+    ]
   }
 }
