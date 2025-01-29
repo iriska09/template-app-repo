@@ -29,7 +29,7 @@ source "amazon-ebs" "ami" {
 }
 
 build {
-  sources = ["source.amazon-ebs.ubuntu"]
+  sources = ["source.amazon-ebs.ami"]
 
   provisioner "shell" {
     inline = [
