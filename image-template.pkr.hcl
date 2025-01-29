@@ -12,13 +12,13 @@ variable "ami_name" {
 }
 
 variable "source_ami" {
-  default = "id of ami"  
+  default = "ami-03638f11378d0a14f"  
 }
 
 source "amazon-ebs" "ami" {
   region           = "us-east-1"
   source_ami       = var.source_ami
-  instance_type    = "t2.medium"
+  instance_type    = "t2.micro"
   ssh_username     = "ubuntu"
   ami_name         = var.ami_name
 
@@ -36,6 +36,7 @@ build {
       "sudo apt-get update -y",
       "sudo apt-get install -y python3 python3-pip",
       "pip3 install -r requirements.txt"
+      "python3 app.py"
     ]
   }
 }
