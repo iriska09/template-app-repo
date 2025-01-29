@@ -7,7 +7,6 @@ pipeline {
     stages {
         stage('Packer Init') {
             steps {
-                sh 'aws configure'
                 echo 'Initializing Packer..'
                 sh 'packer init .'
             }
