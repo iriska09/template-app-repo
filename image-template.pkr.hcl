@@ -28,12 +28,23 @@ source "amazon-ebs" "ami" {
 build {
   sources = ["source.amazon-ebs.ami"]
 
+  provisioner "file" {
+    source      = "app/requirements.txt"
+    destination = "/tmp/requirements.txt"
+  }
+
+  provisioner "file" {
+    source      = "app/app.py"
+    destination = "/tmp/app.py"
+  }
+
   provisioner "shell" {
     inline = [
+      "until ping -c4 google.com; do echo 'Waiting for network...'; sleep 10; done",
       "sudo apt-get update -y",
       "sudo apt-get install -y python3 python3-pip",
-      "pip3 install -r app/requirements.txt",
-      "python3 app/app.py"
+      "pip3 install -r /tmp/requirements.txt",
+      "python3 /tmp/app.py"
     ]
   }
 }
