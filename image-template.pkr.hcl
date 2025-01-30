@@ -28,12 +28,22 @@ source "amazon-ebs" "ami" {
 build {
   sources = ["source.amazon-ebs.ami"]
 
+  provisioner "file" {
+    source      = "app/requirements.txt"
+    destination = "/home/ubuntu/requirements.txt"
+  }
+
+  provisioner "file" {
+    source      = "app/app.py"
+    destination = "/home/ubuntu/app.py"
+  }
+
   provisioner "shell" {
     inline = [
       "sudo apt-get update -y",
       "sudo apt-get install -y python3 python3-pip",
-      "pip3 install -r /var/lib/jenkins/workspace/test/app/requirements.txt",
-      "python3 /var/lib/jenkins/workspace/test/app/app.py"
+      "pip3 install --user -r /home/ubuntu/requirements.txt",
+      "python3 /home/ubuntu/app.py"
     ]
   }
 }
