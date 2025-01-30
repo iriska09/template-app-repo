@@ -15,6 +15,9 @@ pipeline {
             steps {
                 echo 'Validating Packer template..'
                 sh 'packer validate ${PACKER_TEMPLATE}'
+                echo 'Verifying workspace..'
+                sh 'ls -l'
+                sh 
             }
         }
         stage('Build Image and take AMI from output') {
