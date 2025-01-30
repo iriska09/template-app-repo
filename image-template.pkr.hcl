@@ -13,7 +13,7 @@ variable "ami_name" {
 
 source "amazon-ebs" "ami" {
   region           = "us-east-1"
-  source_ami       = "ami-03638f11378d0a14f"
+  source_ami       = "ami-0c614dee691cbbf37"
   instance_type    = "t2.medium"
   ssh_username     = "ubuntu"
   ami_name         = var.ami_name
@@ -28,16 +28,18 @@ source "amazon-ebs" "ami" {
 build {
   sources = ["source.amazon-ebs.ami"]
 
+  # Use absolute paths for file provisioners
   provisioner "file" {
-    source      = "app/requirements.txt"
+    source      = "/var/lib/jenkins/workspace/test/app/requirements.txt"
     destination = "/home/ubuntu/requirements.txt"
   }
 
   provisioner "file" {
-    source      = "app/app.py"
+    source      = "/var/lib/jenkins/workspace/test/app/app.py"
     destination = "/home/ubuntu/app.py"
   }
 
+  # Run the necessary commands on the instance
   provisioner "shell" {
     inline = [
       "sudo apt-get update -y",
