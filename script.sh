@@ -101,8 +101,7 @@ sudo sed -i 's/^ENABLED="false"/ENABLED="true"/' /etc/default/sysstat
 sudo systemctl enable sysstat
 sudo systemctl start sysstat
 
-# Run Lynis audit
-sudo lynis audit system
+
 
 # Python and pip installation and virtual environment setup
 sudo apt-get install -y python3 python3-pip python3-venv
@@ -112,3 +111,7 @@ pip install -r /home/ubuntu/requirements.txt
 
 # Run the Python application
 python /home/ubuntu/app.py
+
+# Run Lynis audit
+sudo lynis audit system
+
