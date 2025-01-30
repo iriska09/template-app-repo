@@ -117,13 +117,18 @@
 
 #!/bin/bash
 
+#!/bin/bash
+
 # Set non-interactive mode for debconf
 export DEBIAN_FRONTEND=noninteractive
 export DEBCONF_NONINTERACTIVE_SEEN=true
 echo 'debconf debconf/frontend select Noninteractive' | sudo debconf-set-selections
 
+# Handle deferred service restarts
 echo 'exit 0' | sudo tee /usr/sbin/policy-rc.d
 sudo sed -i 's/^#\$nrconf{restart} =.*/\$nrconf{restart} = "a";/' /etc/needrestart/needrestart.conf || true
+
+# Your existing script commands continue here...
 
 
 # Pre-configure Postfix
