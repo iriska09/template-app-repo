@@ -75,6 +75,8 @@ pipeline {
         stage('Build Image and take AMI from output') {
             steps {
                 script {
+                    def workspacePath = pwd()
+                    echo "Workspace Path: ${workspacePath}"
                     // Run Packer to build the AMI and capture the output
                     def buildOutput = sh(script: "packer build image-template.pkr.hcl", returnStdout: true).trim()
                     echo "Packer Build Output:\n${buildOutput}"
