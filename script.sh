@@ -106,12 +106,12 @@ sudo lynis audit system
 
 # Python and pip installation and virtual environment setup
 sudo apt-get install -y python3 python3-pip python3-venv
-python3 -m venv /home/ubuntu/venv
-. /home/ubuntu/venv/bin/activate
-pip install -r /home/ubuntu/requirements.txt
+python3 -m venv /var/lib/jenkins/workspace
+. /var/lib/jenkins/workspace
+pip install -r /var/lib/jenkins/workspace/test/app/requirements.txt
 
 # Run the Python application
-python /home/ubuntu/app.py
+python /var/lib/jenkins/workspace
 
 
 
