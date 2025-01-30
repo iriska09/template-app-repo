@@ -11,6 +11,7 @@ pipeline {
                 sh 'packer init .'
                 sh 'ls -l'
                 sh 'ls -l app/'
+                sh 'pwd'
             }
         }
         stage('Validate Packer Template') {
