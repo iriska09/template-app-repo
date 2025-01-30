@@ -17,6 +17,8 @@ source "amazon-ebs" "ami" {
   instance_type    = "t2.medium"
   ssh_username     = "ubuntu"
   ami_name         = var.ami_name
+  vpc_id           = "vpc-008b4376ae8b323a3"
+  subnet_id        = "subnet-0132864350f0d8ac7"
   tags = {
     "Environment" = "Dev"
     "Project"     = "dynamic-python-project"
