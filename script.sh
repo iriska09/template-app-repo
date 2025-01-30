@@ -2,7 +2,6 @@
 
 # Set non-interactive mode for debconf
 export DEBIAN_FRONTEND=noninteractive
-export DEBCONF_NONINTERACTIVE_SEEN=true
 
 # Pre-configure Postfix
 echo "postfix postfix/mailname string example.com" | sudo debconf-set-selections
@@ -108,7 +107,7 @@ sudo lynis audit system
 # Python and pip installation and virtual environment setup
 sudo apt-get install -y python3 python3-pip python3-venv
 python3 -m venv /home/ubuntu/venv
-source /home/ubuntu/venv/bin/activate
+. /home/ubuntu/venv/bin/activate
 pip install -r /home/ubuntu/requirements.txt
 
 # Run the Python application
