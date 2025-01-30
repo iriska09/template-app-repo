@@ -32,12 +32,10 @@ build {
 
   provisioner "shell" {
     inline = [
-      "sudo apt-get update -y",
-      "sudo apt-get install -y python3 python3-pip",
-      "pip3 install -r requirements.txt",
-      "python3 app.py"
+      "sudo apt-get update -y || (sleep 30 && sudo apt-get update -y)",
+      "sudo apt-get install -y python3 python3-pip || (sleep 30 && sudo apt-get install -y python3 python3-pip)",
+      "pip3 install -r app/requirements.txt || (sleep 30 && pip3 install -r app/requirements.txt)",
+      "python3 app/app.py"
     ]
   }
 }
-
-
