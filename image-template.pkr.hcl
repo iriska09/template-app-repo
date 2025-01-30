@@ -29,24 +29,8 @@ source "amazon-ebs" "ami" {
 build {
   sources = ["source.amazon-ebs.ami"]
 
-  provisioner "file" {
-    source      = "${var.workspace_path}/app/requirements.txt"
-    destination = "/home/ubuntu/requirements.txt"
-  }
-
-  provisioner "file" {
-    source      = "${var.workspace_path}/app/app.py"
-    destination = "/home/ubuntu/app.py"
-  }
-
+  # Shell provisioner for direct commands
   provisioner "shell" {
-    inline = [
-      "sudo apt-get update -y",
-      "sudo apt-get install -y python3 python3-pip python3-venv",
-      "python3 -m venv /home/ubuntu/venv",
-      ". /home/ubuntu/venv/bin/activate",
-      "pip install -r /home/ubuntu/requirements.txt",
-      "python /home/ubuntu/app.py"
-    ]
+    script = "./script.sh" # Path to your shell script
   }
 }
