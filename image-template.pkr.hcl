@@ -24,28 +24,3 @@ source "amazon-ebs" "ami" {
     "Project"     = "dynamic-python-project"
   }
 }
-
-build {
-  sources = ["source.amazon-ebs.ami"]
-
-  # Use absolute paths for file provisioners
-  provisioner "file" {
-    source      = "/var/lib/jenkins/workspace/test/app/requirements.txt"
-    destination = "/home/ubuntu/requirements.txt"
-  }
-
-  provisioner "file" {
-    source      = "/var/lib/jenkins/workspace/test/app/app.py"
-    destination = "/home/ubuntu/app.py"
-  }
-
-  # Run the necessary commands on the instance
-  provisioner "shell" {
-    inline = [
-      "sudo apt-get update -y",
-      "sudo apt-get install -y python3 python3-pip",
-      "pip3 install --user -r /home/ubuntu/requirements.txt",
-      "python3 /home/ubuntu/app.py"
-    ]
-  }
-}
