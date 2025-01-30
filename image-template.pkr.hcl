@@ -28,23 +28,24 @@ source "amazon-ebs" "ami" {
 build {
   sources = ["source.amazon-ebs.ami"]
 
+  # Upload the files to the instance using absolute paths
   provisioner "file" {
-    source      = "app/requirements.txt"
-    destination = "/tmp/requirements.txt"
+    source      = "${path.template_dir}/app/requirements.txt"
+    destination = "/home/ubuntu/requirements.txt"
   }
 
   provisioner "file" {
-    source      = "app/app.py"
-    destination = "/tmp/app.py"
+    source      = "${path.template_dir}/app/app.py"
+    destination = "/home/ubuntu/app.py"
   }
 
+  # Run the necessary commands on the instance
   provisioner "shell" {
     inline = [
-      "until ping -c4 google.com; do echo 'Waiting for network...'; sleep 10; done",
       "sudo apt-get update -y",
       "sudo apt-get install -y python3 python3-pip",
-      "pip3 install -r /tmp/requirements.txt",
-      "python3 /tmp/app.py"
+      "pip3 install --user -r /home/ubuntu/requirements.txt",
+      "python3 /home/ubuntu/app.py"
     ]
   }
 }
