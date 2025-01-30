@@ -9,15 +9,15 @@ pipeline {
             steps {
                 echo 'Initializing Packer..'
                 sh 'packer init .'
+                sh 'ls -l'
+                sh 'ls -l app/'
             }
         }
         stage('Validate Packer Template') {
             steps {
                 echo 'Validating Packer template..'
                 sh 'packer validate ${PACKER_TEMPLATE}'
-                echo 'Verifying workspace..'
-                sh 'ls -l'
-                sh 
+                
             }
         }
         stage('Build Image and take AMI from output') {
