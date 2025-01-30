@@ -17,21 +17,20 @@ source "amazon-ebs" "ami" {
   instance_type    = "t2.medium"
   ssh_username     = "ubuntu"
   ami_name         = var.ami_name
-  vpc_id     = "vpc-0f3cde7daa94a7762"
-  subnet_id  = "subnet-05f5fc56be24d7746" 
+  vpc_id           = "vpc-0f3cde7daa94a7762"
+  subnet_id        = "subnet-05f5fc56be24d7746"
   tags = {
     "Environment" = "Dev"
     "Project"     = "dynamic-python-project"
   }
 }
 
-
-
 build {
   sources = ["source.amazon-ebs.ami"]
 
   provisioner "shell" {
     inline = [
+      "until ping -c4 google.com; do echo 'Waiting for network...'; sleep 10; done",
       "sudo apt-get update -y || (sleep 30 && sudo apt-get update -y)",
       "sudo apt-get install -y python3 python3-pip || (sleep 30 && sudo apt-get install -y python3 python3-pip)",
       "pip3 install -r app/requirements.txt || (sleep 30 && pip3 install -r app/requirements.txt)",
