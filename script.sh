@@ -7,7 +7,6 @@ export DEBCONF_NONINTERACTIVE_SEEN=true
 # Pre-configure Postfix
 echo "postfix postfix/mailname string example.com" | sudo debconf-set-selections
 echo "postfix postfix/main_mailer_type select Internet Site" | sudo debconf-set-selections
-echo 'this is test'
 
 # Install Postfix non-interactively
 sudo apt-get install -y postfix
@@ -25,7 +24,6 @@ sudo apt-get install -y lynis ansible libpam-tmpdir acct sysstat fail2ban rkhunt
 echo "iptables-persistent iptables-persistent/autosave_v4 boolean true" | sudo debconf-set-selections
 echo "iptables-persistent iptables-persistent/autosave_v6 boolean true" | sudo debconf-set-selections
 sudo apt-get install -y iptables-persistent
-
 
 # Install Ansible role
 sudo ansible-galaxy collection install devsec.hardening --force
@@ -107,7 +105,11 @@ sudo systemctl start sysstat
 # Run Lynis audit
 sudo lynis audit system
 
-sudo apt-get update -y
-sudo apt-get install -y python3 python3-pip
-pip3 install --user -r /var/lib/jenkins/workspace/test/app/requirements.txt
-python3 /var/lib/jenkins/workspace/test/app/app.py
+# Python and pip installation and virtual environment setup
+sudo apt-get install -y python3 python3-pip python3-venv
+python3 -m venv /home/ubuntu/venv
+source /home/ubuntu/venv/bin/activate
+pip install -r /home/ubuntu/requirements.txt
+
+# Run the Python application
+python /home/ubuntu/app.py
