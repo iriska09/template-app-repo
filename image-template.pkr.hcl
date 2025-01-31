@@ -29,8 +29,10 @@ source "amazon-ebs" "ami" {
 build {
   sources = ["source.amazon-ebs.ami"]
 
+
   # Shell provisioner for direct commands
   provisioner "shell" {
     script = "./script.sh" # Path to your shell script
   }
 }
+
