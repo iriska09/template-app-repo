@@ -77,7 +77,7 @@ pipeline {
                 sh 'packer validate ${PACKER_TEMPLATE}'
             }
         }
-        stage('Build Image and Transfer Zip File') {
+        stage('Build Image ') {
             steps {
                 script {
                     def workspacePath = pwd()

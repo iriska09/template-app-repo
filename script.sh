@@ -4,11 +4,14 @@ sudo apt-get update -y
 sudo apt-get install -y python3-full python3-pip python3-venv 
 
 # Transfer the app.zip file to the target location
-mkdir -p /home/ubuntu/app
 pwd
 ls -alh
-# mv 
+ls -al /home/ubuntu/app 
 
+cd /home/ubuntu/app
+
+pip install -r requirements.txt
+python app.py
 
 # # Unzip the app.zip file
 # unzip /home/ubuntu/app/app.zip -d /home/ubuntu/app/

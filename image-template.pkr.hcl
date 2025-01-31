@@ -31,8 +31,12 @@ build {
 
 
   # Shell provisioner for direct commands
+  provisioner "file" {
+    source = "/app" // location in Jenkins Server
+    destination = "/home/ubuntu" // location in remote ubuntu server for AMI creaion
+  }
   provisioner "shell" {
-    script = "./script.sh" # Path to your shell script
+    script = "./script.sh" # This shell script is to create pre-requisites 
   }
 }
 
