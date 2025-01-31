@@ -61,13 +61,6 @@ pipeline {
         PACKER_TEMPLATE = 'image-template.pkr.hcl'
         REGION = 'us-east-1'
     }
-    stages {
-        stage('Install Zip Package') {
-            steps {
-                echo 'Installing zip package..'
-                sh 'apt-get update && apt-get install -y zip'
-            }
-        }
         stage('Packer Init') {
             steps {
                 echo 'Initializing Packer..'
@@ -81,13 +74,6 @@ pipeline {
             steps {
                 echo 'Validating Packer template..'
                 sh 'packer validate ${PACKER_TEMPLATE}'
-            }
-        }
-        stage('Zip App Directory') {
-            steps {
-                echo 'Zipping app directory..'
-                sh 'zip -r app.zip app'
-                sh 'ls -l app.zip'
             }
         }
         stage('Build Image and Transfer Zip File') {
