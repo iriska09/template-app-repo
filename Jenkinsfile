@@ -90,7 +90,7 @@ pipeline {
                 }     
             }
         }
-    }
+    
     post {
         success {
             echo 'Pipeline executed successfully!'
@@ -102,4 +102,5 @@ pipeline {
             echo 'Pipeline execution completed!'
         }
     }
+}
 
