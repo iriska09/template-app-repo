@@ -8,23 +8,10 @@ pwd
 ls -alh
 ls -al /home/ubuntu/app 
 
+export PATH=$PATH:/home/ubuntu/.local/bin
+
 cd /home/ubuntu/app
 
 pip install -r requirements.txt
 python app.py
 
-# # Unzip the app.zip file
-# unzip /home/ubuntu/app/app.zip -d /home/ubuntu/app/
-
-# # Navigate to the app directory
-# cd /home/ubuntu/app/app
-
-# # Create and activate a virtual environment
-# python3 -m venv venv
-# source venv/bin/activate
-
-# # Install application dependencies
-# pip install --break-system-packages -r requirements.txt
-
-# # Run the Python application
-# python app.py
