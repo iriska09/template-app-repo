@@ -12,6 +12,6 @@ export PATH=$PATH:/home/ubuntu/.local/bin
 
 cd /home/ubuntu/app
 
-pip install -r requirements.txt
+pip3 install -r requirements.txt
 python3 app.py
 
