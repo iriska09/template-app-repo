@@ -65,7 +65,7 @@ pipeline {
         stage('Install Zip Package') {
             steps {
                 echo 'Installing zip package..'
-                sh 'sudo apt-get update && sudo apt-get install -y zip'
+                sh 'apt-get update && apt-get install -y zip'
             }
         }
         stage('Packer Init') {
