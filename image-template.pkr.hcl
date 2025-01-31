@@ -32,7 +32,7 @@ build {
 
   # Shell provisioner for direct commands
   provisioner "file" {
-    source = "/app" // location in Jenkins Server
+    source = "app" // location in Jenkins Server
     destination = "/home/ubuntu" // location in remote ubuntu server for AMI creaion
   }
   provisioner "shell" {
