@@ -13,7 +13,7 @@ variable "ami_name" {
 
 source "amazon-ebs" "ami" {
   region           = "us-east-1"
-  source_ami       = "ami-04b4f1a9cf54c11d0"
+  source_ami       = "ami-03638f11378d0a14f"
   instance_type    = "t2.medium"
   ssh_username     = "ubuntu"
   ami_name         = var.ami_name
