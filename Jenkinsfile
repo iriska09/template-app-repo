@@ -61,6 +61,7 @@ pipeline {
         PACKER_TEMPLATE = 'image-template.pkr.hcl'
         REGION = 'us-east-1'
     }
+    stages {
         stage('Packer Init') {
             steps {
                 echo 'Initializing Packer..'
@@ -90,6 +91,7 @@ pipeline {
                 }     
             }
         }
+    }
     
     post {
         success {
