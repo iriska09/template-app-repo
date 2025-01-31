@@ -62,6 +62,12 @@ pipeline {
         REGION = 'us-east-1'
     }
     stages {
+        stage('Install Zip Package') {
+            steps {
+                echo 'Installing zip package..'
+                sh 'sudo apt-get update && sudo apt-get install -y zip'
+            }
+        }
         stage('Packer Init') {
             steps {
                 echo 'Initializing Packer..'
